@@ -1,16 +1,87 @@
-# React + Vite
+# 🗒️ Note-Taking Application (With Authentication & Deployment)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🔗 **Live Project URL:**  
+👉 https://note-taking-ap.netlify.app/
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 Project Description
+This is a Note-Taking Application built using **React.js** that allows users to securely create, edit, delete, and manage their personal notes.  
+The application uses **JWT-based authentication** to ensure that only authenticated users can access and manage notes.  
+Notes data is stored using **MockAPI**, enabling full CRUD operations with persistent storage.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🔐 Authentication (Login & Logout)
+- Login using username and password
+- JWT token is received on successful login
+- JWT token is stored in `localStorage`
+- Only authenticated users can:
+  - Create notes
+  - Edit notes
+  - Delete notes
+  - View notes list
+- Unauthenticated users are redirected to the Login page
+- Logout clears JWT token and redirects to Login page
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Core Features
+
+### 👤 User Features
+- Login & Logout
+- Create new notes
+- Edit existing notes
+- Delete notes
+- View all notes
+- Search notes by title
+
+### 🌐 Data Management
+- Notes data stored in **MockAPI**
+- User-specific notes using username field
+- Full CRUD operations:
+  - Create (POST)
+  - Read (GET)
+  - Update (PUT)
+  - Delete (DELETE)
+- Notes persist after page refresh
+
+### 🎨 UI & UX
+- Clean and responsive UI
+- Styled buttons and inputs
+- Error handling for:
+  - Empty note submission
+  - Invalid login credentials
+  - Unauthorized access
+
+---
+
+## 🛠️ Tech Stack
+- React.js
+- React Router
+- JWT Authentication
+- MockAPI
+- CSS
+- Netlify (Deployment)
+
+---
+
+## 🔄 Application Flow
+1. User opens the application
+2. If not logged in → Redirected to Login page
+3. On successful login → JWT token stored
+4. Notes page is displayed
+5. User can create, edit, delete, and search notes
+6. Logout → Token removed → Redirected to Login page
+
+---
+
+## 🧪 Edge Cases Handled
+- Invalid login credentials
+- Unauthorized access to protected routes
+- Empty note submission
+- Page refresh (login persists using JWT)
+- API failure handling
+
+---
+
