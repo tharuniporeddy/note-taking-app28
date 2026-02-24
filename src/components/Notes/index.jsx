@@ -23,12 +23,25 @@ const Notes = () => {
     const userNotes = data.filter(
       (note) => note.username === username
     );
+
     setNotes(userNotes);
   };
 
   useEffect(() => {
     fetchNotes();
   }, []);
+
+  const onChangeTitle = (event) => {
+    setTitle(event.target.value);
+  };
+
+  const onChangeText = (event) => {
+    setText(event.target.value);
+  };
+
+  const onChangeSearch = (event) => {
+    setSearch(event.target.value);
+  };
 
   const handleSubmit = async () => {
     if (title.trim() === "" || text.trim() === "") {
@@ -37,14 +50,19 @@ const Notes = () => {
     }
 
     if (editingId) {
-      await fetch(`${API_URL}/${editingId}`, {
+      const options = {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title, content: text }),
-      });
+        body: JSON.stringify({
+          title,
+          content: text,
+        }),
+      };
+
+      await fetch(`${API_URL}/${editingId}`, options);
       setEditingId(null);
     } else {
-      await fetch(API_URL, {
+      const options = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -52,7 +70,9 @@ const Notes = () => {
           content: text,
           username,
         }),
-      });
+      };
+
+      await fetch(API_URL, options);
     }
 
     setTitle("");
@@ -62,7 +82,11 @@ const Notes = () => {
   };
 
   const deleteNote = async (id) => {
-    await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+    const options = {
+      method: "DELETE",
+    };
+
+    await fetch(`${API_URL}/${id}`, options);
     fetchNotes();
   };
 
@@ -95,7 +119,7 @@ const Notes = () => {
           className="search-input"
           placeholder="Search notes by title..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={onChangeSearch}
         />
 
         <div className="note-form">
@@ -103,13 +127,13 @@ const Notes = () => {
             type="text"
             placeholder="Title"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={onChangeTitle}
           />
 
           <textarea
             placeholder="Write your note..."
             value={text}
-            onChange={(e) => setText(e.target.value)}
+            onChange={onChangeText}
           />
 
           {error && <p className="form-error">{error}</p>}
