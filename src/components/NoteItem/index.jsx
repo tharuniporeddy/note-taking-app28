@@ -1,6 +1,14 @@
 import "./index.css";
 
 const NoteItem = ({ note, deleteNote, editNote }) => {
+  const onClickEdit = () => {
+    editNote(note);
+  };
+
+  const onClickDelete = () => {
+    deleteNote(note.id);
+  };
+
   return (
     <li className="note-card">
       <h3 className="note-title">{note.title}</h3>
@@ -9,14 +17,14 @@ const NoteItem = ({ note, deleteNote, editNote }) => {
       <div className="note-actions">
         <button
           className="small-btn edit-btn"
-          onClick={() => editNote(note)}
+          onClick={onClickEdit}
         >
           Edit
         </button>
 
         <button
           className="small-btn delete-btn"
-          onClick={() => deleteNote(note.id)}
+          onClick={onClickDelete}
         >
           Delete
         </button>
